@@ -12,8 +12,7 @@ url = 'https://www.geelongaustralia.com.au/advertisedplanning/default.aspx'
 r = requests.get(url)
 soup = BeautifulSoup(r.content, 'lxml')
 
-table = soup.find('table', class_='table table-striped')
-rows = table.find_all('tr')
+rows = soup.find_all('tr')
 
 for row in rows:
     try:
