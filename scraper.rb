@@ -1,5 +1,6 @@
 require 'scraperwiki'
 require 'mechanize'
+require 'titleize'
 
 FileUtils.touch('data.sqlite')
 
@@ -18,8 +19,8 @@ rows2 = table2.search('tr')
 
 for row in rows1 do
   record = {}
-  suburb = row.search('td')[1].text.strip
-  record['address'] = row.search('td')[0].text.strip + ', ' + suburb
+  suburb = row.search('td')[1].text.strip.titleize
+  record['address'] = row.search('td')[0].text.strip.titleize + ', ' + suburb
   record['council_reference'] = row.search('td')[2].text.strip
   record['date_scraped'] = today
   record['on_notice_from'] = DateTime.strptime(row.search('td')[3].text.strip, '%d %b %Y').strftime('%Y-%m-%d')
@@ -33,8 +34,8 @@ end
 
 for row in rows2 do
   record = {}
-  suburb = row.search('td')[1].text.strip
-  record['address'] = row.search('td')[0].text.strip + ', ' + suburb
+  suburb = row.search('td')[1].text.strip.titleize
+  record['address'] = row.search('td')[0].text.strip.titleize + ', ' + suburb
   record['council_reference'] = row.search('td')[2].text.strip
   record['date_scraped'] = today
   record['on_notice_to'] = DateTime.strptime(row.search('td')[3].text.strip, '%d %b %Y').strftime('%Y-%m-%d')
